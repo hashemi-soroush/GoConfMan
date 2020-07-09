@@ -1,3 +1,3 @@
-module git.cafebazaar.ir/SayedSoroushHashemi/goconfman.git
+module github.com/Sayed-Soroush-Hashemi/GoConfMan
 
 go 1.13

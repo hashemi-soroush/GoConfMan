@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"git.cafebazaar.ir/SayedSoroushHashemi/goconfman.git/pkg/goconfman"
+	"github.com/Sayed-Soroush-Hashemi/GoConfMan/pkg/goconfman"
 	"testing"
 )
 
