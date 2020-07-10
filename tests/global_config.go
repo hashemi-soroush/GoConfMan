@@ -5,6 +5,7 @@ type GlobalConfig struct {
 	FloatValue   float32
 	StringValue  string
 	LocalConfig  LocalConfig
+	NonGoConfManConfig NonGoConfManConfig
 }
 
 func (g *GlobalConfig) BindDefaults() {
@@ -16,4 +17,5 @@ func (g *GlobalConfig) BindDefaults() {
 func (g *GlobalConfig) BindAliases() {
 	g.LocalConfig.IntegerValue = g.IntegerValue
 	g.LocalConfig.StringValue = g.StringValue
+	g.NonGoConfManConfig.LocalConfig.FloatValue = g.FloatValue
 }

@@ -28,4 +28,14 @@ func TestLoadFromAll(t *testing.T) {
 	if g.LocalConfig.StringValue != "in global config" {
 		t.Errorf("g.LocalConfig.StringValue = %s != \"in global config\"", g.LocalConfig.StringValue)
 	}
+
+	if g.NonGoConfManConfig.LocalConfig.IntegerValue != 420 {
+		t.Errorf("g.NonGoConfManConfig.LocalConfig.IntegerValue = %d != 420", g.NonGoConfManConfig.LocalConfig.IntegerValue)
+	}
+	if g.NonGoConfManConfig.LocalConfig.FloatValue != 3.14 {
+		t.Errorf("g.NonGoConfManConfig.LocalConfig.FloatValue = %f != 3.14", g.NonGoConfManConfig.LocalConfig.FloatValue)
+	}
+	if g.NonGoConfManConfig.LocalConfig.StringValue != "in local config" {
+		t.Errorf("g.NonGoConfManConfig.LocalConfig.StringValue = %s != \"in local config\"", g.NonGoConfManConfig.LocalConfig.StringValue)
+	}
 }
