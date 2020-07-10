@@ -10,11 +10,17 @@ type ConfigWithDefaults interface {
 }
 
 // TODO: this method should be able to access unexported fields
-func LoadFromDefaults(config ConfigWithDefaults) {
-	config.BindDefaults()
+func LoadFromDefaults(config interface{}) {
+	c, ok := config.(ConfigWithDefaults)
+	if ok {
+		c.BindDefaults()
+	}
 
-	configVal := reflect.ValueOf(config).Elem()
-	for i := 0 ; i < configVal.NumField() ; i++ {
+	configVal := reflect.ValueOf(config)
+	if configVal.Kind() == reflect.Ptr {
+		configVal = configVal.Elem()
+	}
+	for i := 0; i < configVal.NumField(); i++ {
 		fieldVal := configVal.Field(i)
 
 		if fieldVal.Kind() == reflect.Struct {
@@ -22,10 +28,7 @@ func LoadFromDefaults(config ConfigWithDefaults) {
 		}
 
 		if fieldVal.Kind() == reflect.Ptr {
-			innerConfig, ok := fieldVal.Interface().(ConfigWithDefaults)
-			if ok {
-				LoadFromDefaults(innerConfig)
-			}
+			LoadFromDefaults(fieldVal.Interface())
 		}
 	}
 }
