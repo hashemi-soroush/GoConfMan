@@ -12,7 +12,7 @@ Given these ideas, GoConfMan has a simple structure.
 
 ## Codebase structure
 For each source, an interface, named `ConfigWithX`, is defined that has a method called `BindX()`. Beside it, there is
-a function called `LoadFromX(ConfigWithX)`. Something like this:
+a function called `LoadFromX(interface{})`. Something like this:
 
 ```go
 package goconfman
@@ -21,7 +21,7 @@ type ConfigWithDefaults interface {
     BindDefaults()
 }
 
-func LoadFromDefaults(config ConfigWithDefaults) {
+func LoadFromDefaults(config interface{}) {
     ...
 }
 ```
@@ -29,7 +29,7 @@ func LoadFromDefaults(config ConfigWithDefaults) {
 And that's it. That's the whole codebase of GoConfMan. A bunch of files like this. You wanna add a new source? Just add
 a new file like this to your project or be kind and put it in GoConfMan codebase and send a merge request.
 
-You might think that `LoadFromX(ConfigWithX)` functions are some huge functions that do a lot of stuff and are hard and
+You might think that `LoadFromX(interface{})` functions are some huge functions that do a lot of stuff and are hard and
 time-consuming to write. Actually, the only thing they do is calling their corresponding `BindX` method for all the
 fields in the given config struct recursively. Of course, there are some differences here and there, but basically
 that's the whole point of these functions: to load the config recursively.
@@ -98,3 +98,10 @@ exposed, otherwise the `LoadFromX` functions can't see it and can't call the `Bi
  
 2. You can do whatever you want in `BindX` methods. You can set defaults in the `BindAliases()` methods and vice versa.
 But, for the sake of clarity and separation, don't do that.
+
+## Migrating to GoConfMan
+GoConfman enables you to gradually migrate from your old configuration manager to GoConfMan. You can call `LoadFromX`
+functions on any struct and it recursively looks for GoConfMan-compatible structs and load them. So, you can start small
+and just migrate one of your configuration structs and yet you can call `LoadFromX` on your top-most config struct and
+it works. For an example, check out the `non_goconfman_config.go` and `load_from_defaults.go` files in the `tests`
+folder. 
