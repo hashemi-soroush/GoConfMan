@@ -1,7 +1,7 @@
 package goconfman
 
-func LoadFromAll(config interface{}) {
+func LoadFromAll(config interface{}, envVarPrefix string) {
 	LoadFromDefaults(config)
 	LoadFromAliases(config)
-	LoadFromEnvVars(config, "HELL")
+	LoadFromEnvVars(config, envVarPrefix)
 }

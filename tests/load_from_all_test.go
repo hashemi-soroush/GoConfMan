@@ -8,7 +8,7 @@ import (
 
 func TestLoadFromAllGlobalConfig(t *testing.T) {
 	g := GlobalConfig{}
-	goconfman.LoadFromAll(&g)
+	goconfman.LoadFromAll(&g, "")
 
 	if g.IntegerValue != 42 {
 		t.Errorf("g.IntegerValue = %d != 42", g.IntegerValue)
@@ -43,7 +43,7 @@ func TestLoadFromAllGlobalConfig(t *testing.T) {
 
 func TestLoadFromAllNonGoConfManConfig(t *testing.T) {
 	ng := NonGoConfManConfig{}
-	goconfman.LoadFromAll(&ng)
+	goconfman.LoadFromAll(&ng, "")
 
 	if ng.LocalConfig.IntegerValue != 420 {
 		t.Errorf("ng.LocalConfig.IntegerValue = %d != 420", ng.LocalConfig.IntegerValue)
