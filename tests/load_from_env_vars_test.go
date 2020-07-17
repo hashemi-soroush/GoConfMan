@@ -51,16 +51,16 @@ func TestGlobalConfigLoadFromEnvVars(t *testing.T) {
 		t.Errorf("g.SliceValue is loaded wrong: %v vs %v", []byte(g.LocalConfig.SliceValue[1][:]), []byte("you"))
 	}
 
-	if math.Abs(float64(g.LocalConfig.SliceOfSliceValue[0][0] - 1.0)) > 1e-8 ||
-		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[0][1] - 2.0)) > 1e-8  ||
-		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[0][2] - 3.0)) > 1e-8  ||
-		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[1][0] - 3.14)) > 1e-8 ||
-		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[1][1] - 2.71)) > 1e-8 {
+	if math.Abs(float64(g.LocalConfig.SliceOfSliceValue[0][0]-1.0)) > 1e-8 ||
+		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[0][1]-2.0)) > 1e-8 ||
+		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[0][2]-3.0)) > 1e-8 ||
+		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[1][0]-3.14)) > 1e-8 ||
+		math.Abs(float64(g.LocalConfig.SliceOfSliceValue[1][1]-2.71)) > 1e-8 {
 		t.Errorf("g.LocalConfig.SliceOfSliceValue is loaded wrong: %v", g.LocalConfig.SliceOfSliceValue)
 	}
 
-	if  math.Abs(float64(g.LocalConfig.MapValue["hello"] - 3.14)) > 1e-8 ||
-		math.Abs(float64(g.LocalConfig.MapValue["you"] - 2.71)) > 1e-8 {
+	if math.Abs(float64(g.LocalConfig.MapValue["hello"]-3.14)) > 1e-8 ||
+		math.Abs(float64(g.LocalConfig.MapValue["you"]-2.71)) > 1e-8 {
 		t.Errorf("g.LocalConfig.MapValue is loaded wrong: %v", g.LocalConfig.MapValue)
 	}
 

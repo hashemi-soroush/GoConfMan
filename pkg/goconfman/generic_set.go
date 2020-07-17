@@ -101,7 +101,7 @@ func setSlices(fieldValue reflect.Value, stringValue string) error {
 
 		if newElement.Elem().Type().Kind() == reflect.String {
 			correctedValue := newElement.Elem().String()
-			correctedValue = correctedValue[1:len(correctedValue)-1]
+			correctedValue = correctedValue[1 : len(correctedValue)-1]
 			newElement.Elem().SetString(correctedValue)
 		}
 
@@ -136,7 +136,7 @@ func setMaps(fieldValue reflect.Value, stringValue string) error {
 
 		if newElement.Elem().Type().Kind() == reflect.String {
 			correctedValue := newElement.Elem().String()
-			correctedValue = correctedValue[1:len(correctedValue)-1]
+			correctedValue = correctedValue[1 : len(correctedValue)-1]
 			newElement.Elem().SetString(correctedValue)
 		}
 

@@ -3,10 +3,10 @@ package tests
 import "github.com/Sayed-Soroush-Hashemi/GoConfMan/pkg/goconfman"
 
 type GlobalConfig struct {
-	IntegerValue int
-	FloatValue   float32
-	StringValue  string
-	LocalConfig  LocalConfig
+	IntegerValue       int
+	FloatValue         float32
+	StringValue        string
+	LocalConfig        LocalConfig
 	NonGoConfManConfig NonGoConfManConfig
 }
 

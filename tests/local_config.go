@@ -3,13 +3,13 @@ package tests
 import "github.com/Sayed-Soroush-Hashemi/GoConfMan/pkg/goconfman"
 
 type LocalConfig struct {
-	IntegerValue int
-	FloatValue   float32
-	StringValue  string
-	SliceValue []string
+	IntegerValue      int
+	FloatValue        float32
+	StringValue       string
+	SliceValue        []string
 	SliceOfSliceValue [][]float32
-	MapValue map[string]float32
-	ComplicatedValue []map[string][][]string
+	MapValue          map[string]float32
+	ComplicatedValue  []map[string][][]string
 }
 
 func (l *LocalConfig) BindDefaults() {
