@@ -1,10 +1,10 @@
-package goconfman
+package internal
 
 import (
 	"reflect"
 )
 
-func loadRecursive(config interface{}, loadFunc func(interface{})) {
+func LoadRecursive(config interface{}, loadFunc func(interface{})) {
 	configVal := reflect.ValueOf(config)
 	if configVal.Kind() == reflect.Ptr {
 		configVal = configVal.Elem()

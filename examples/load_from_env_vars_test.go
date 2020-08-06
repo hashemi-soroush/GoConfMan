@@ -76,5 +76,4 @@ func TestGlobalConfigLoadFromEnvVars(t *testing.T) {
 		g.LocalConfig.ComplicatedValue[2]["are"][3][0] != "ok?" {
 		t.Errorf("g.LocalConfig.ComplicatedValue is loaded wrong %v", g.LocalConfig.ComplicatedValue)
 	}
-
 }

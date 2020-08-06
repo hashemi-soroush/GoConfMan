@@ -2,6 +2,7 @@ package goconfman
 
 import (
 	"fmt"
+	"github.com/Sayed-Soroush-Hashemi/GoConfMan/internal"
 	"os"
 	"reflect"
 )
@@ -26,7 +27,7 @@ func LoadFromEnvVars(config interface{}, prefix string) {
 		if fieldVal.Kind() == reflect.Ptr {
 			newPrefix := fieldVal.Type().Elem().Name()
 			if prefix != "" {
-				newPrefix = fmt.Sprintf("%s__%s", prefix, newPrefix)
+				newPrefix = fmt.Sprintf("%s_%s", prefix, newPrefix)
 			}
 			LoadFromEnvVars(fieldVal.Interface(), newPrefix)
 		}
@@ -41,19 +42,16 @@ func LoadFromEnvVars(config interface{}, prefix string) {
 func BindEnvVar(field interface{}, envVarName string, prefix string) {
 	fieldValue := reflect.ValueOf(field)
 	if fieldValue.Kind() != reflect.Ptr {
-		panic("goconfman.BindEnvVar's field argument must a pointer, so goconfman can change its value")
+		panic("goconfman.BindEnvVar's field argument must be a pointer, so goconfman can change its value")
 	}
 
 	if prefix != "" {
-		envVarName = fmt.Sprintf("%s__%s", prefix, envVarName)
+		envVarName = fmt.Sprintf("%s_%s", prefix, envVarName)
 	}
 	valueString, ok := os.LookupEnv(envVarName)
 	if ok == false {
 		return
 	}
 
-	err := genericSet(field, valueString)
-	if err != nil {
-		panic(fmt.Sprintf("Failed to load env var %s\n%s", envVarName, err))
-	}
+	internal.GenericSet(field, valueString)
 }

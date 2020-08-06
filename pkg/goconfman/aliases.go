@@ -1,11 +1,13 @@
 package goconfman
 
+import "github.com/Sayed-Soroush-Hashemi/GoConfMan/internal"
+
 type ConfigWithAliases interface {
 	BindAliases()
 }
 
 func LoadFromAliases(config interface{}) {
-	loadRecursive(config, LoadFromAliases)
+	internal.LoadRecursive(config, LoadFromAliases)
 
 	c, ok := config.(ConfigWithAliases)
 	if ok {
