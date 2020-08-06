@@ -9,7 +9,7 @@ import (
 
 func TestLoadFromAllGlobalConfig(t *testing.T) {
 	g := GlobalConfig{}
-	goconfman.LoadFromAll(&g, "", "")
+	goconfman.LoadFromAll(&g, nil, "", "")
 
 	expectedG := GlobalConfig{
 		IntegerValue:       42,
@@ -47,7 +47,7 @@ func TestLoadFromAllGlobalConfig(t *testing.T) {
 
 func TestLoadFromAllNonGoConfManConfig(t *testing.T) {
 	ng := NonGoConfManConfig{}
-	goconfman.LoadFromAll(&ng, "", "")
+	goconfman.LoadFromAll(&ng, nil, "", "")
 
 	expectedNG := NonGoConfManConfig{
 		IntegerValue: 0,

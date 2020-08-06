@@ -1,6 +1,7 @@
 package goconfman
 
 import (
+	"encoding/json"
 	"reflect"
 )
 
@@ -8,6 +9,15 @@ func LoadFromMap(config interface{}, configMap map[string]interface{}) error {
 	configValue := reflect.ValueOf(config)
 	if configValue.Type().Kind() == reflect.Ptr {
 		configValue = configValue.Elem()
+	}
+
+	configBytes, err := json.Marshal(configMap)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(configBytes, config)
+	if err != nil {
+		return err
 	}
 
 	//for key, element := range configMap {

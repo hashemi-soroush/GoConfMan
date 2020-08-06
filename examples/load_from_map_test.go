@@ -2,7 +2,8 @@ package examples
 
 import (
 	"github.com/Sayed-Soroush-Hashemi/GoConfMan/pkg/goconfman"
-	"math"
+	"github.com/google/go-cmp/cmp"
+	"reflect"
 	"testing"
 )
 
@@ -21,13 +22,36 @@ func TestLoadFromMap(t *testing.T) {
 		t.Fatalf("Error in LoadFromMap: %s", err.Error())
 	}
 
-	if g.IntegerValue != 2 {
-		t.Errorf("g.IntegerValue is loaded wrong: %v", g)
+	expectedG := GlobalConfig{
+		IntegerValue:       2,
+		FloatValue:         -3.14,
+		StringValue:        "",
+		LocalConfig:        LocalConfig{
+			IntegerValue:      313,
+			FloatValue:        0,
+			StringValue:       "",
+			SliceValue:        nil,
+			SliceOfSliceValue: nil,
+			MapValue:          nil,
+			ComplicatedValue:  nil,
+		},
+		NonGoConfManConfig: NonGoConfManConfig{
+			IntegerValue: 0,
+			FloatValue:   0,
+			StringValue:  "",
+			LocalConfig:  LocalConfig{
+				IntegerValue:      0,
+				FloatValue:        0,
+				StringValue:       "",
+				SliceValue:        nil,
+				SliceOfSliceValue: nil,
+				MapValue:          nil,
+				ComplicatedValue:  nil,
+			},
+		},
 	}
-	if math.Abs(float64(g.FloatValue - (-3.14))) > 1e-8 {
-		t.Errorf("g.FloatValue is loaded wrong: %v", g)
-	}
-	if g.LocalConfig.IntegerValue != 313 {
-		t.Errorf("g.LocalConfig.IntegerValue is loaded wrong: %v", g)
+
+	if reflect.DeepEqual(g, expectedG) == false {
+		t.Errorf("g is different from the expectedG. here's the diff: \n%s", cmp.Diff(g, expectedG))
 	}
 }
