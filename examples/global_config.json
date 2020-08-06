@@ -1,0 +1,13 @@
+{
+  "IntegerValue": 1234,
+  "FloatValue": 987.3,
+  "StringValue": "globalConfig.StringValue in global_config.json",
+  "LocalConfig": {
+    "IntegerValue": 42
+  },
+  "NonGoConfManConfig": {
+    "LocalConfig": {
+      "IntegerValue": 71
+    }
+  }
+}

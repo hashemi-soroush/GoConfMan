@@ -1,4 +1,4 @@
-package tests
+package examples
 
 type NonGoConfManConfig struct {
 	IntegerValue int

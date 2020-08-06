@@ -1,4 +1,4 @@
-package tests
+package examples
 
 import "github.com/Sayed-Soroush-Hashemi/GoConfMan/pkg/goconfman"
 

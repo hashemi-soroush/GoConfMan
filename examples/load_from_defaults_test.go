@@ -1,42 +1,70 @@
-package tests
+package examples
 
 import (
 	"github.com/Sayed-Soroush-Hashemi/GoConfMan/pkg/goconfman"
-	"math"
+	"github.com/google/go-cmp/cmp"
+	"reflect"
 	"testing"
 )
 
-func TestLoadFromDefaults(t *testing.T) {
+func TestLoadFromDefaultsOnGlobalConfig(t *testing.T) {
 	g := GlobalConfig{}
 	goconfman.LoadFromDefaults(&g)
 
-	if g.IntegerValue != 42 {
-		t.Errorf("g.IntegerValue = %d != 42", g.IntegerValue)
-	}
-	if math.Abs(float64(g.FloatValue-3.14)) > 1e-8 {
-		t.Errorf("g.FloatValue = %f != 3.14", g.FloatValue)
-	}
-	if g.StringValue != "in global config" {
-		t.Errorf("g.StringValue = %s != \"in global config\"", g.StringValue)
+	expectedG := GlobalConfig{
+		IntegerValue:       42,
+		FloatValue:         3.14,
+		StringValue:        "in global config",
+		LocalConfig:        LocalConfig{
+			IntegerValue:      420,
+			FloatValue:        31.4,
+			StringValue:       "in local config",
+			SliceValue:        nil,
+			SliceOfSliceValue: nil,
+			MapValue:          nil,
+			ComplicatedValue:  nil,
+		},
+		NonGoConfManConfig: NonGoConfManConfig{
+			IntegerValue: 0,
+			FloatValue:   0,
+			StringValue:  "",
+			LocalConfig:  LocalConfig{
+				IntegerValue:      420,
+				FloatValue:        31.4,
+				StringValue:       "in local config",
+				SliceValue:        nil,
+				SliceOfSliceValue: nil,
+				MapValue:          nil,
+				ComplicatedValue:  nil,
+			},
+		},
 	}
 
-	if g.LocalConfig.IntegerValue != 420 {
-		t.Errorf("g.LocalConfig.IntegerValue = %d != 420", g.LocalConfig.IntegerValue)
+	if reflect.DeepEqual(g, expectedG) == false {
+		t.Errorf("g is different from the expectedG. here's the diff: \n%s", cmp.Diff(g, expectedG))
 	}
-	if math.Abs(float64(g.LocalConfig.FloatValue-31.4)) > 1e-8 {
-		t.Errorf("g.LocalConfig.FloatValue = %f != 31.4", g.LocalConfig.FloatValue)
-	}
-	if g.LocalConfig.StringValue != "in local config" {
-		t.Errorf("g.LocalConfig.StringValue = %s != \"in local config\"", g.LocalConfig.StringValue)
+}
+
+func TestLoadFromDefaultsOnNonGoconfmanConfig(t *testing.T) {
+	ng := NonGoConfManConfig{}
+	goconfman.LoadFromDefaults(&ng)
+
+	expectedNG := NonGoConfManConfig{
+		IntegerValue: 0,
+		FloatValue:   0,
+		StringValue:  "",
+		LocalConfig:  LocalConfig{
+			IntegerValue:      420,
+			FloatValue:        31.4,
+			StringValue:       "in local config",
+			SliceValue:        nil,
+			SliceOfSliceValue: nil,
+			MapValue:          nil,
+			ComplicatedValue:  nil,
+		},
 	}
 
-	if g.NonGoConfManConfig.LocalConfig.IntegerValue != 420 {
-		t.Errorf("g.NonGoConfManConfig.LocalConfig.IntegerValue = %d != 420", g.NonGoConfManConfig.LocalConfig.IntegerValue)
-	}
-	if math.Abs(float64(g.NonGoConfManConfig.LocalConfig.FloatValue-31.4)) > 1e-8 {
-		t.Errorf("g.NonGoConfManConfig.LocalConfig.FloatValue = %f != 31.4", g.NonGoConfManConfig.LocalConfig.FloatValue)
-	}
-	if g.NonGoConfManConfig.LocalConfig.StringValue != "in local config" {
-		t.Errorf("g.NonGoConfManConfig.LocalConfig.StringValue = %s != \"in local config\"", g.NonGoConfManConfig.LocalConfig.StringValue)
+	if reflect.DeepEqual(ng, expectedNG) == false {
+		t.Errorf("ng is different from the expectedNG. here's the diff: \n%s", cmp.Diff(ng, expectedNG))
 	}
 }
