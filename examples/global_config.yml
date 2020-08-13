@@ -1,0 +1,8 @@
+integervalue: 1234
+floatvalue: 987.3
+stringvalue: "globalConfig.StringValue in global_config.json"
+localconfig:
+  integervalue: 42
+nongoconfmanconfig:
+  localconfig:
+    integervalue: 71
