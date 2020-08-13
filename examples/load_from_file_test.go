@@ -58,7 +58,7 @@ func TestLoadFromYmlFileOnGlobalConfig(t *testing.T) {
 	expectedG := GlobalConfig{
 		IntegerValue: 1234,
 		FloatValue:   987.3,
-		StringValue:  "globalConfig.StringValue in global_config.json",
+		StringValue:  "globalConfig.StringValue in global_config.yml",
 		LocalConfig: LocalConfig{
 			IntegerValue:      42,
 			FloatValue:        0,
