@@ -1,8 +1,8 @@
-integervalue: 1234
-floatvalue: 987.3
+integervalue: 4321
+floatvalue: 789.3
 stringvalue: "globalConfig.StringValue in global_config.yml"
 localconfig:
-  integervalue: 42
+  integervalue: 24
 nongoconfmanconfig:
   localconfig:
-    integervalue: 71
+    integervalue: 646

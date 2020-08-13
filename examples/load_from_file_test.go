@@ -56,11 +56,11 @@ func TestLoadFromYmlFileOnGlobalConfig(t *testing.T) {
 	}
 
 	expectedG := GlobalConfig{
-		IntegerValue: 1234,
-		FloatValue:   987.3,
+		IntegerValue: 4321,
+		FloatValue:   789.3,
 		StringValue:  "globalConfig.StringValue in global_config.yml",
 		LocalConfig: LocalConfig{
-			IntegerValue:      42,
+			IntegerValue:      24,
 			FloatValue:        0,
 			StringValue:       "",
 			SliceValue:        nil,
@@ -73,7 +73,7 @@ func TestLoadFromYmlFileOnGlobalConfig(t *testing.T) {
 			FloatValue:   0,
 			StringValue:  "",
 			LocalConfig: LocalConfig{
-				IntegerValue:      71,
+				IntegerValue:      646,
 				FloatValue:        0,
 				StringValue:       "",
 				SliceValue:        nil,
@@ -89,11 +89,11 @@ func TestLoadFromYmlFileOnGlobalConfig(t *testing.T) {
 	}
 }
 
-func TestLoadFromFileOnNonGoconfmanConfig(t *testing.T) {
+func TestLoadFromJsonFileOnNonGoconfmanConfig(t *testing.T) {
 	ng := NonGoConfManConfig{}
 	err := goconfman.LoadFromFile(&ng, "non_goconfman_config.json")
 	if err != nil {
-		t.Fatalf("Error in LoadFromMap: %s", err.Error())
+		t.Fatalf("Error in LoadFromFile: %s", err.Error())
 	}
 
 	expectedNG := NonGoConfManConfig{
@@ -118,9 +118,9 @@ func TestLoadFromFileOnNonGoconfmanConfig(t *testing.T) {
 
 func TestLoadFromYmlFileOnNonGoconfmanConfig(t *testing.T) {
 	ng := NonGoConfManConfig{}
-	err := goconfman.LoadFromFile(&ng, "non_goconfman_config.json")
+	err := goconfman.LoadFromFile(&ng, "non_goconfman_config.yml")
 	if err != nil {
-		t.Fatalf("Error in LoadFromMap: %s", err.Error())
+		t.Fatalf("Error in LoadFromFile: %s", err.Error())
 	}
 
 	expectedNG := NonGoConfManConfig{
@@ -128,8 +128,8 @@ func TestLoadFromYmlFileOnNonGoconfmanConfig(t *testing.T) {
 		FloatValue:   0,
 		StringValue:  "",
 		LocalConfig: LocalConfig{
-			IntegerValue:      71,
-			FloatValue:        13.31,
+			IntegerValue:      17,
+			FloatValue:        31.13,
 			StringValue:       "",
 			SliceValue:        nil,
 			SliceOfSliceValue: nil,
