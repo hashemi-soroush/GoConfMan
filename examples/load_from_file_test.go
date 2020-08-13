@@ -11,7 +11,7 @@ func TestLoadFromJsonFileOnGlobalConfig(t *testing.T) {
 	g := GlobalConfig{}
 	err := goconfman.LoadFromFile(&g, "global_config.json")
 	if err != nil {
-		t.Fatalf("Error in LoadFromMap: %s", err.Error())
+		t.Fatalf("Error in LoadFromFile: %s", err.Error())
 	}
 
 	expectedG := GlobalConfig{
