@@ -1,6 +1,6 @@
 integervalue: 1234
 floatvalue: 987.3
-stringvalue: "globalConfig.StringValue in global_config.json"
+stringvalue: "globalConfig.StringValue in global_config.yml"
 localconfig:
   integervalue: 42
 nongoconfmanconfig:
