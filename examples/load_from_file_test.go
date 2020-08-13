@@ -143,7 +143,7 @@ func TestLoadFromYmlFileOnNonGoconfmanConfig(t *testing.T) {
 	}
 }
 
-func TestLoadFromFileAfterLoadFromDefaultsOnGlobalConfig(t *testing.T) {
+func TestLoadFromJsonFileAfterLoadFromDefaultsOnGlobalConfig(t *testing.T) {
 	g := GlobalConfig{}
 	goconfman.LoadFromDefaults(&g)
 	err := goconfman.LoadFromFile(&g, "global_config.json")
@@ -170,6 +170,48 @@ func TestLoadFromFileAfterLoadFromDefaultsOnGlobalConfig(t *testing.T) {
 			StringValue:  "",
 			LocalConfig: LocalConfig{
 				IntegerValue:      71,
+				FloatValue:        31.4,
+				StringValue:       "in local config",
+				SliceValue:        nil,
+				SliceOfSliceValue: nil,
+				MapValue:          nil,
+				ComplicatedValue:  nil,
+			},
+		},
+	}
+
+	if reflect.DeepEqual(g, expectedG) == false {
+		t.Errorf("g is different from the expectedG. here's the diff: \n%s", cmp.Diff(g, expectedG))
+	}
+}
+
+func TestLoadFromYmlFileAfterLoadFromDefaultsOnGlobalConfig(t *testing.T) {
+	g := GlobalConfig{}
+	goconfman.LoadFromDefaults(&g)
+	err := goconfman.LoadFromFile(&g, "global_config.yml")
+	if err != nil {
+		t.Fatalf("Error in LoadFromMap: %s", err.Error())
+	}
+
+	expectedG := GlobalConfig{
+		IntegerValue: 4321,
+		FloatValue:   789.3,
+		StringValue:  "globalConfig.StringValue in global_config.yml",
+		LocalConfig: LocalConfig{
+			IntegerValue:      24,
+			FloatValue:        31.4,
+			StringValue:       "in local config",
+			SliceValue:        nil,
+			SliceOfSliceValue: nil,
+			MapValue:          nil,
+			ComplicatedValue:  nil,
+		},
+		NonGoConfManConfig: NonGoConfManConfig{
+			IntegerValue: 0,
+			FloatValue:   0,
+			StringValue:  "",
+			LocalConfig: LocalConfig{
+				IntegerValue:      646,
 				FloatValue:        31.4,
 				StringValue:       "in local config",
 				SliceValue:        nil,
