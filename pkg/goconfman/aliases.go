@@ -7,10 +7,10 @@ type ConfigWithAliases interface {
 }
 
 func LoadFromAliases(config interface{}) {
-	internal.LoadRecursive(config, LoadFromAliases)
-
 	c, ok := config.(ConfigWithAliases)
 	if ok {
 		c.BindAliases()
 	}
+
+	internal.LoadRecursive(config, LoadFromAliases)
 }
